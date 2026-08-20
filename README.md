@@ -1,6 +1,6 @@
 # IVR Lab for Copilot Studio Voice Bots
 
-A test harness for Copilot Studio-driven IVR flows. Admins define test scenarios, testers place browser-based calls through Azure Communication Services (ACS), and the softphone displays the bot's recognized data, intent, raw text, and phase progress in real time.
+IVR Lab shortens the feedback loop between building a Copilot Studio voice agent and proving that it works with real callers. Automated evaluations are a strong first step, but production-ready IVR flows must also be tested by people—with different languages, accents, phrasing, and behavior. IVR Lab replaces disconnected call scripts, Excel trackers, and unstructured notes with a browser-based test harness that gives each tester clear instructions and generated test data, places the real call through Azure Communication Services (ACS), captures the conversation state in real time, and ties structured feedback to the call. The resulting data closes the loop: teams can measure outcomes, identify weak dialogs, and use the evidence with GitHub Copilot to improve their Copilot Studio flows faster.
 
 ![Live softphone showing the correlation code, phase timeline, generated values, and raw text](docs/images/ivr-lab-live-softphone.png)
 
