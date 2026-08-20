@@ -1,0 +1,26 @@
+.git
+.gitignore
+.DS_Store
+.idea
+.vscode
+node_modules
+dist
+.tanstack
+.vinxi
+coverage
+*.log
+docs
+README.md
+Dockerfile
+.dockerignore
+
+# Never let secrets or local data into image layers.
+.env
+.env.*
+.data
+*.db
+*.sqlite
+
+# Local tooling state.
+.claude
+.playwright-cli
