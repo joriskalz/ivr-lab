@@ -486,6 +486,7 @@ export function SoftphoneCallHistoryCard(props: {
   clearHistory?: () => void
   history: SoftphoneCallHistoryDisplayEntry[]
   hydrated: boolean
+  maskSensitiveValues?: boolean
   mode?: 'admin' | 'local'
   toolbar?: React.ReactNode
 }) {
@@ -495,6 +496,7 @@ export function SoftphoneCallHistoryCard(props: {
   const [phaseFilter, setPhaseFilter] = useState<SoftphoneHistoryPhaseFilter>('all')
   const mode = props.mode ?? 'local'
   const isAdminMode = mode === 'admin'
+  const hiddenValue = '************'
   const isFiltering = filterFromDate.length > 0 || feedbackFilter !== 'all' || phaseFilter !== 'all'
   const fromDateMs = useMemo(() => resolveLocalDateMidnightMs(filterFromDate), [filterFromDate])
   const phaseOptions = useMemo(() => resolveSoftphoneHistoryPhaseOptions(props.history), [props.history])
@@ -835,7 +837,7 @@ export function SoftphoneCallHistoryCard(props: {
                         <span>Journey {formatSoftphoneDuration(entry.totalDurationWithoutInitMs)}</span>
                         <span>Total {formatSoftphoneDuration(entry.totalDurationMs)}</span>
                         <span>{(entry.phases ?? []).length} phases</span>
-                        {entry.correlationCode ? <span className="font-mono">{entry.correlationCode}</span> : null}
+                        {entry.correlationCode ? <span className="font-mono">{props.maskSensitiveValues ? hiddenValue : entry.correlationCode}</span> : null}
                         {isAdminMode ? (
                           <span>{entry.operator?.email ?? entry.operator?.name ?? 'Anonymous'}</span>
                         ) : null}
@@ -865,8 +867,8 @@ export function SoftphoneCallHistoryCard(props: {
                     {[
                       ['Journey duration', formatSoftphoneDuration(selectedEntry.totalDurationWithoutInitMs)],
                       ['Total duration', formatSoftphoneDuration(selectedEntry.totalDurationMs)],
-                      ['Correlation code', selectedEntry.correlationCode ?? '-'],
-                      ['ACS call id', selectedEntry.callIdentifier ?? '-'],
+                      ['Correlation code', props.maskSensitiveValues && selectedEntry.correlationCode ? hiddenValue : selectedEntry.correlationCode ?? '-'],
+                      ['ACS call id', props.maskSensitiveValues && selectedEntry.callIdentifier ? hiddenValue : selectedEntry.callIdentifier ?? '-'],
                       ['Final call state', selectedEntry.finalCallState ?? '-'],
                       ['Phases / intents', `${selectedEntryPhases.length} / ${selectedEntryIntents.length}`],
                       ['Started', formatDateTimeWithSeconds(selectedEntry.startedAt)],
@@ -896,8 +898,8 @@ export function SoftphoneCallHistoryCard(props: {
                       <div className="mt-3 grid gap-2">
                         <DetailRow label="Profile" value={selectedEntry.profileSnapshot?.name ?? selectedEntry.profileName ?? '-'} />
                         <DetailRow label="Profile id" value={<span className="font-mono text-xs">{selectedEntry.profileSnapshot?.id ?? selectedEntry.profileId ?? '-'}</span>} />
-                        <DetailRow label="Primary" value={<span className="font-mono text-xs">{selectedEntry.profileSnapshot?.primaryPhoneNumber ?? '-'}</span>} />
-                        <DetailRow label="Caller ID" value={<span className="font-mono text-xs">{selectedEntry.profileSnapshot?.alternateCallerId ?? '-'}</span>} />
+                        <DetailRow label="Primary" value={<span className="font-mono text-xs">{props.maskSensitiveValues && selectedEntry.profileSnapshot?.primaryPhoneNumber ? hiddenValue : selectedEntry.profileSnapshot?.primaryPhoneNumber ?? '-'}</span>} />
+                        <DetailRow label="Caller ID" value={<span className="font-mono text-xs">{props.maskSensitiveValues && selectedEntry.profileSnapshot?.alternateCallerId ? hiddenValue : selectedEntry.profileSnapshot?.alternateCallerId ?? '-'}</span>} />
                       </div>
                     </div>
 

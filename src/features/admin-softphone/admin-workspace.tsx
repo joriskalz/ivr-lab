@@ -85,6 +85,15 @@ const AUTO_SAVE_DELAY_MS = 900
 const ghostInputClassName = 'rounded-md border-transparent bg-transparent shadow-none transition-colors hover:border-input focus-visible:border-ring dark:bg-transparent'
 const COPY_FEEDBACK_RESET_MS = 2400
 
+function maskSensitiveValue(value: string | null | undefined, visibleSuffixLength = 0) {
+  if (!value) {
+    return '-'
+  }
+
+  const suffix = visibleSuffixLength > 0 ? value.slice(-visibleSuffixLength) : ''
+  return `${'*'.repeat(Math.min(Math.max(value.length - suffix.length, 6), 12))}${suffix}`
+}
+
 type AuthorizedAdminWorkspaceData = Extract<AdminSoftphoneDashboardData, { status: 'authorized' }>
 
 type ScenarioDraft = {
@@ -545,6 +554,7 @@ function ScenarioEditorCard(props: {
 }) {
   const { initialDraft, onCopyScenarioAccessKey, onCopyScenarioUrl, onSaveScenario } = props
   const clearAdminHeaderAutosave = useAdminHeaderStore((state) => state.clearAutosave)
+  const sensitiveInformationVisible = useAdminHeaderStore((state) => state.sensitiveInformationVisible)
   const setAdminHeaderAutosave = useAdminHeaderStore((state) => state.setAutosave)
   const [draft, setDraft] = useState<ScenarioDraft>(() => initialDraft)
   const [clipboardMessage, setClipboardMessage] = useState<string | null>(null)
@@ -1077,6 +1087,7 @@ function ScenarioEditorCard(props: {
                       maxLength={5}
                       pattern="[0-9]{5}"
                       placeholder="generated on save"
+                      type={sensitiveInformationVisible ? 'text' : 'password'}
                       value={draft.accessKey}
                       onChange={(event) => updateDraft((currentValue) => ({
                         ...currentValue,
@@ -1221,12 +1232,12 @@ function ScenarioEditorCard(props: {
                         </div>
                       </div>
                       <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
-                        <AdminDetailItem label="Primary" value={<span className="font-mono text-sm">{profile.primaryPhoneNumber}</span>} />
-                        <AdminDetailItem label="Caller ID" value={<span className="font-mono text-sm">{profile.alternateCallerId}</span>} />
-                        <AdminDetailItem label="ACS endpoint" value={<span className="break-all text-sm">{profile.acsEndpoint}</span>} />
+                        <AdminDetailItem label="Primary" value={<span className="font-mono text-sm">{sensitiveInformationVisible ? profile.primaryPhoneNumber : maskSensitiveValue(profile.primaryPhoneNumber, 3)}</span>} />
+                        <AdminDetailItem label="Caller ID" value={<span className="font-mono text-sm">{sensitiveInformationVisible ? profile.alternateCallerId : maskSensitiveValue(profile.alternateCallerId, 3)}</span>} />
+                        <AdminDetailItem label="ACS endpoint" value={<span className="break-all text-sm">{sensitiveInformationVisible ? profile.acsEndpoint : maskSensitiveValue(profile.acsEndpoint)}</span>} />
                         <AdminDetailItem
                           label="ACS key"
-                          value={<span className="font-mono text-sm">{profile.acsAccessKey ? `${profile.acsAccessKey.slice(0, 4)}...` : '-'}</span>}
+                          value={<span className="font-mono text-sm">{sensitiveInformationVisible ? (profile.acsAccessKey || '-') : maskSensitiveValue(profile.acsAccessKey)}</span>}
                         />
                       </div>
                     </div>
@@ -1408,6 +1419,7 @@ function ScenarioEditorCard(props: {
                   className="font-mono"
                   id="profile-primary-number"
                   placeholder="+491701234567"
+                  type={sensitiveInformationVisible ? 'text' : 'password'}
                   value={profileDraft.primaryPhoneNumber}
                   onChange={(event) => setProfileDraft((currentValue) => ({
                     ...currentValue,
@@ -1421,6 +1433,7 @@ function ScenarioEditorCard(props: {
                   className="font-mono"
                   id="profile-caller-id"
                   placeholder="+491701234569"
+                  type={sensitiveInformationVisible ? 'text' : 'password'}
                   value={profileDraft.alternateCallerId}
                   onChange={(event) => setProfileDraft((currentValue) => ({
                     ...currentValue,
@@ -1433,6 +1446,7 @@ function ScenarioEditorCard(props: {
                 <Input
                   id="profile-acs-endpoint"
                   placeholder="https://example.communication.azure.com"
+                  type={sensitiveInformationVisible ? 'text' : 'password'}
                   value={profileDraft.acsEndpoint}
                   onChange={(event) => setProfileDraft((currentValue) => ({
                     ...currentValue,
@@ -1445,6 +1459,7 @@ function ScenarioEditorCard(props: {
                 <Input
                   className="font-mono"
                   id="profile-acs-key"
+                  type={sensitiveInformationVisible ? 'text' : 'password'}
                   value={profileDraft.acsAccessKey}
                   onChange={(event) => setProfileDraft((currentValue) => ({
                     ...currentValue,
@@ -1588,6 +1603,7 @@ function ScenarioRestrictedCard() {
 export function AdminScenarioListPage() {
   const { data } = useAdminWorkspace()
   const queryClient = useQueryClient()
+  const sensitiveInformationVisible = useAdminHeaderStore((state) => state.sensitiveInformationVisible)
   const [scenarioPendingDeletion, setScenarioPendingDeletion] = useState<SoftphoneTestScenarioRecord | null>(null)
   const scenarioManagerNamesByScenarioId = useMemo(() => {
     const nextMap = new Map<string, string[]>()
@@ -1694,7 +1710,7 @@ export function AdminScenarioListPage() {
                       <span className="font-mono text-xs text-muted-foreground">{scenario.id}</span>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      {scenario.config.phases.length} phases · {scenario.config.recognizedFields.length} fields · {scenario.config.profiles.length} {scenario.config.profiles.length === 1 ? 'profile' : 'profiles'} · key <span className="font-mono">{scenario.accessKey}</span>
+                      {scenario.config.phases.length} phases · {scenario.config.recognizedFields.length} fields · {scenario.config.profiles.length} {scenario.config.profiles.length === 1 ? 'profile' : 'profiles'} · key <span className="font-mono">{sensitiveInformationVisible ? scenario.accessKey : maskSensitiveValue(scenario.accessKey, 2)}</span>
                       {managerNames.length > 0 ? <> · {managerNames.join(', ')}</> : null}
                     </p>
                   </Link>
@@ -2100,6 +2116,7 @@ export function AdminUsersPage() {
 
 export function AdminDeveloperInformationPage() {
   const { data } = useAdminWorkspace()
+  const sensitiveInformationVisible = useAdminHeaderStore((state) => state.sensitiveInformationVisible)
   const [selectedScenarioId, setSelectedScenarioId] = useState<string>(data.scenarios[0]?.id ?? '')
   const effectiveSelectedScenarioId =
     data.scenarios.some((scenario) => scenario.id === selectedScenarioId)
@@ -2125,7 +2142,7 @@ export function AdminDeveloperInformationPage() {
     <AdminPanel>
       <AdminPanelHeader
         title="Developer reference"
-        description={<span>Access key <span className="font-mono text-xs">{selectedScenario.accessKey}</span> · {selectedScenario.config.profiles.length} profiles · {selectedScenario.config.phases.length} phases</span>}
+        description={<span>Access key <span className="font-mono text-xs">{sensitiveInformationVisible ? selectedScenario.accessKey : maskSensitiveValue(selectedScenario.accessKey, 2)}</span> · {selectedScenario.config.profiles.length} profiles · {selectedScenario.config.phases.length} phases</span>}
         actions={(
           <Select value={effectiveSelectedScenarioId} onValueChange={setSelectedScenarioId}>
             <SelectTrigger className="h-8 min-w-[14rem]">
@@ -2145,6 +2162,7 @@ export function AdminDeveloperInformationPage() {
         contentHeightClassName="h-[min(70vh,52rem)]"
         context={createScenarioInformationContext(selectedScenario)}
         defaultTab="developer"
+        maskSensitiveValues={!sensitiveInformationVisible}
       />
     </AdminPanel>
   )
@@ -2153,6 +2171,7 @@ export function AdminDeveloperInformationPage() {
 export function AdminAnalyticsPage() {
   const { data } = useAdminWorkspace()
   const queryClient = useQueryClient()
+  const sensitiveInformationVisible = useAdminHeaderStore((state) => state.sensitiveInformationVisible)
   const [selectedScenarioId, setSelectedScenarioId] = useState<string>('all')
   const [scenarioPendingHistoryDeletion, setScenarioPendingHistoryDeletion] = useState<{
     id: string
@@ -2231,6 +2250,7 @@ export function AdminAnalyticsPage() {
       <SoftphoneCallHistoryCard
         history={filteredHistory}
         hydrated
+        maskSensitiveValues={!sensitiveInformationVisible}
         mode="admin"
         toolbar={(
           <div className="flex flex-wrap items-center gap-2">

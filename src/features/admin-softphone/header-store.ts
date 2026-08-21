@@ -11,7 +11,9 @@ type AdminHeaderAutosaveState = {
 type AdminHeaderStore = {
   autosave: AdminHeaderAutosaveState
   clearAutosave: () => void
+  sensitiveInformationVisible: boolean
   setAutosave: (autosave: AdminHeaderAutosaveState) => void
+  toggleSensitiveInformation: () => void
 }
 
 const emptyAutosaveState: AdminHeaderAutosaveState = {
@@ -23,5 +25,9 @@ const emptyAutosaveState: AdminHeaderAutosaveState = {
 export const useAdminHeaderStore = create<AdminHeaderStore>((set) => ({
   autosave: emptyAutosaveState,
   clearAutosave: () => set({ autosave: emptyAutosaveState }),
+  sensitiveInformationVisible: false,
   setAutosave: (autosave) => set({ autosave }),
+  toggleSensitiveInformation: () => set((state) => ({
+    sensitiveInformationVisible: !state.sensitiveInformationVisible,
+  })),
 }))

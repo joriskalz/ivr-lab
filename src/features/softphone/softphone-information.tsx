@@ -220,8 +220,10 @@ function SoftphoneUserInformation() {
 
 function SoftphoneDeveloperInformation(props: {
   context: SoftphoneInformationContext
+  maskSensitiveValues?: boolean
 }) {
   const bundle = resolveExternalEndpointBundle(props.context)
+  const displayedHeaderValue = props.maskSensitiveValues ? '************' : bundle.headerValue
 
   return (
     <div className="grid gap-6">
@@ -236,7 +238,7 @@ function SoftphoneDeveloperInformation(props: {
           </div>
           <div className="rounded-md border bg-muted/30 px-3 py-2.5">
             <p className="font-mono text-xs text-muted-foreground">{bundle.headerName}</p>
-            <p className="mt-1 break-all font-mono text-xs text-foreground">{bundle.headerValue}</p>
+            <p className="mt-1 break-all font-mono text-xs text-foreground">{displayedHeaderValue}</p>
           </div>
         </div>
       </SectionCard>
@@ -257,7 +259,7 @@ function SoftphoneDeveloperInformation(props: {
                   correlationHeaderName: bundle.correlationHeaderName,
                   correlationHeaderValue: bundle.correlationHeaderValue,
                   headerName: bundle.headerName,
-                  headerValue: bundle.headerValue,
+                  headerValue: displayedHeaderValue,
                   kind: sample.kind,
                   url: resolveSampleUrl(bundle, sample.kind),
                 })}
@@ -275,6 +277,7 @@ export function SoftphoneInformationSurface(props: {
   contentHeightClassName?: string
   context: SoftphoneInformationContext
   defaultTab?: SoftphoneInformationTab
+  maskSensitiveValues?: boolean
   showDeveloperTab?: boolean
 }) {
   const contentHeightClassName = props.contentHeightClassName ?? 'h-[min(62vh,38rem)]'
@@ -331,7 +334,7 @@ export function SoftphoneInformationSurface(props: {
       <TabsContent value="developer" className="mt-0 min-h-0">
         <ScrollArea className={contentHeightClassName}>
           <div className="grid gap-6 px-5 py-5 sm:px-6">
-            <SoftphoneDeveloperInformation context={props.context} />
+            <SoftphoneDeveloperInformation context={props.context} maskSensitiveValues={props.maskSensitiveValues} />
           </div>
         </ScrollArea>
       </TabsContent>

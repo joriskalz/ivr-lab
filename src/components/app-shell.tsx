@@ -3,6 +3,8 @@ import {
   Check,
   ChevronRight,
   Code2,
+  Eye,
+  EyeOff,
   FlaskConical,
   LoaderCircle,
   LogOut,
@@ -103,6 +105,8 @@ export function AppShell(props: { children: React.ReactNode }) {
   const hasAdminAccess = viewerAccessQuery.data?.hasAdminAccess === true
   const showSignedInShell = isAuthenticated && !pathname.startsWith('/softphone')
   const adminHeaderAutosave = useAdminHeaderStore((state) => state.autosave)
+  const sensitiveInformationVisible = useAdminHeaderStore((state) => state.sensitiveInformationVisible)
+  const toggleSensitiveInformation = useAdminHeaderStore((state) => state.toggleSensitiveInformation)
   const adminDashboardQuery = useQuery({
     ...adminSoftphoneDashboardQueryOptions,
     enabled: isAdminRoute && hasAdminAccess,
@@ -255,6 +259,19 @@ export function AppShell(props: { children: React.ReactNode }) {
                   {adminHeaderAutosave.label}
                 </span>
               </div>
+            ) : null}
+            {isAdminRoute ? (
+              <Button
+                aria-label={sensitiveInformationVisible ? 'Hide sensitive information' : 'Show sensitive information'}
+                aria-pressed={sensitiveInformationVisible}
+                size="icon-sm"
+                title={sensitiveInformationVisible ? 'Hide sensitive information' : 'Show sensitive information'}
+                type="button"
+                variant="ghost"
+                onClick={toggleSensitiveInformation}
+              >
+                {sensitiveInformationVisible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+              </Button>
             ) : null}
           </header>
 
