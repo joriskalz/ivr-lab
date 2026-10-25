@@ -209,14 +209,13 @@ export function useSoftphoneSession(activeProfile: SoftphoneProfile | null, sess
     }
   }, [disposeCallResources])
 
-  useEffect(() => {
+  const [previousSessionId, setPreviousSessionId] = useState(sessionId)
+  if (previousSessionId !== sessionId) {
+    setPreviousSessionId(sessionId)
     setErrorDetails('')
     setErrorMessage('')
-
-    if (callRef.current == null) {
-      setStatusMessage('Ready to place a call.')
-    }
-  }, [sessionId])
+    if (!hasActiveCall) setStatusMessage('Ready to place a call.')
+  }
 
   const buildDiagnosticContext = useCallback((call?: SoftphoneCallApi | null): SoftphoneCallDiagnosticContext => ({
     callIdentifier: call == null ? '' : resolveCallIdentifier(call),

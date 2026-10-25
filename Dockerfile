@@ -1,4 +1,4 @@
-FROM oven/bun:1.3.4 AS deps
+FROM oven/bun:1.4.4-debian AS deps
 WORKDIR /app
 
 COPY package.json bun.lock ./
@@ -12,13 +12,13 @@ RUN bun run build
 
 # Runtime only needs production dependencies (drizzle-orm for migrations);
 # dev tooling (vite, typescript, eslint, drizzle-kit) stays out of the image.
-FROM oven/bun:1.3.4 AS prod-deps
+FROM oven/bun:1.4.4-debian AS prod-deps
 WORKDIR /app
 
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
 
-FROM oven/bun:1.3.4 AS runtime
+FROM oven/bun:1.4.4-debian AS runtime
 WORKDIR /app
 
 ENV NODE_ENV=production

@@ -100,7 +100,7 @@ function toViewer(session: NonNullable<Awaited<ReturnType<typeof getAdminSession
 }
 
 export const mirrorSoftphoneCallToAdminStorage = createServerFn({ method: 'POST' })
-  .inputValidator(validatePersistInput)
+  .validator(validatePersistInput)
   .handler(async ({ data }) => {
     const headers = getRequestHeaders()
     const softphoneSession = resolveSoftphoneSessionFromRequestHeaders(headers)
@@ -182,7 +182,7 @@ export const getAdminSoftphoneDashboard = createServerFn({ method: 'GET' }).hand
 })
 
 export const saveAdminSoftphoneScenario = createServerFn({ method: 'POST' })
-  .inputValidator(validateScenarioInput)
+  .validator(validateScenarioInput)
   .handler(async ({ data }) => {
     const session = await getAdminSession(getRequestHeaders())
 
@@ -210,7 +210,7 @@ export const saveAdminSoftphoneScenario = createServerFn({ method: 'POST' })
   })
 
 export const replaceAdminSoftphoneScenarioManagers = createServerFn({ method: 'POST' })
-  .inputValidator(validateScenarioManagersInput)
+  .validator(validateScenarioManagersInput)
   .handler(async ({ data }) => {
     const session = await getAdminSession(getRequestHeaders())
 
@@ -226,7 +226,7 @@ export const replaceAdminSoftphoneScenarioManagers = createServerFn({ method: 'P
   })
 
 export const deleteAdminSoftphoneScenario = createServerFn({ method: 'POST' })
-  .inputValidator(validateDeleteScenarioInput)
+  .validator(validateDeleteScenarioInput)
   .handler(async ({ data }) => {
     const session = await getAdminSession(getRequestHeaders())
 
@@ -242,7 +242,7 @@ export const deleteAdminSoftphoneScenario = createServerFn({ method: 'POST' })
   })
 
 export const deleteAdminSoftphoneScenarioHistory = createServerFn({ method: 'POST' })
-  .inputValidator(validateDeleteScenarioHistoryInput)
+  .validator(validateDeleteScenarioHistoryInput)
   .handler(async ({ data }) => {
     const session = await getAdminSession(getRequestHeaders())
 
@@ -259,7 +259,7 @@ export const deleteAdminSoftphoneScenarioHistory = createServerFn({ method: 'POS
   })
 
 export const updateAdminSoftphoneUserRole = createServerFn({ method: 'POST' })
-  .inputValidator(validateUserRoleInput)
+  .validator(validateUserRoleInput)
   .handler(async ({ data }) => {
     const session = await getAdminSession(getRequestHeaders())
 

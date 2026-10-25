@@ -733,7 +733,7 @@ export function SoftphonePage(props: {
   const [scenario, setScenario] = useState<SoftphoneScenarioSnapshot | null>(null)
   const [scenarioPreview, setScenarioPreview] = useState<SoftphoneScenarioAccessPreview | null>(props.initialScenarioPreview ?? null)
   const [isLoadingScenarioPreview, setIsLoadingScenarioPreview] = useState(props.initialScenarioPreview == null)
-  const [externalEndpointBundle, setExternalEndpointBundle] = useState<SoftphoneExternalEndpointBundle | null>(null)
+  const [endpointResult, setEndpointResult] = useState<{ sessionId: string; bundle: SoftphoneExternalEndpointBundle } | null>(null)
   const [isHelpDialogOpen, setIsHelpDialogOpen] = useState(false)
   const [isAboutDialogOpen, setIsAboutDialogOpen] = useState(false)
   const [isCallResultDialogOpen, setIsCallResultDialogOpen] = useState(false)
@@ -745,6 +745,7 @@ export function SoftphonePage(props: {
   const [themeMode, setThemeMode] = useState<SoftphoneThemeMode>('light')
   const [selectedProfileId, setSelectedProfileId] = useState('')
   const [sessionId, setSessionId] = useState('')
+  const externalEndpointBundle = isUnlocked && endpointResult?.sessionId === sessionId ? endpointResult.bundle : null
   const [syncMessage, setSyncMessage] = useState('')
   const [syncState, setSyncState] = useState<SyncState>('idle')
   const [softphoneProfiles, setSoftphoneProfiles] = useState<SoftphoneProfile[]>([])
@@ -802,18 +803,20 @@ export function SoftphonePage(props: {
     sessionId,
   })
 
-  useEffect(() => {
+  const [feedbackEntryId, setFeedbackEntryId] = useState(pendingFeedbackEntry?.id)
+  if (feedbackEntryId !== pendingFeedbackEntry?.id) {
+    setFeedbackEntryId(pendingFeedbackEntry?.id)
     setFeedbackMode('sentiment')
     setFeedbackNote('')
     setFeedbackPhaseId(null)
     setFeedbackSeverityRating(null)
-  }, [pendingFeedbackEntry?.id])
+  }
 
   function resetUnlockedState(message: string) {
     setBootstrapError(message)
     setCaseState(null)
     setCorrelationCode('')
-    setExternalEndpointBundle(null)
+    setEndpointResult(null)
     setIsUnlocked(false)
     setScenario(null)
     setSelectedProfileId('')
@@ -884,10 +887,6 @@ export function SoftphonePage(props: {
   useEffect(() => {
     let cancelled = false
 
-    if (props.initialScenarioPreview == null) {
-      setIsLoadingScenarioPreview(true)
-    }
-
     void fetchSoftphoneScenarioPreview(props.scenarioId)
       .then((payload) => {
         if (cancelled) {
@@ -921,22 +920,19 @@ export function SoftphonePage(props: {
   }, [props.initialScenarioPreview, props.scenarioId])
 
   useEffect(() => {
-    if (!isUnlocked || !sessionId) {
-      setExternalEndpointBundle(null)
-      return
-    }
+    if (!isUnlocked || !sessionId) return
 
     let cancelled = false
 
     void fetchSoftphoneExternalEndpoints(sessionId)
       .then((payload) => {
         if (!cancelled) {
-          setExternalEndpointBundle(payload)
+          setEndpointResult({ sessionId, bundle: payload })
         }
       })
       .catch(() => {
         if (!cancelled) {
-          setExternalEndpointBundle(null)
+          setEndpointResult(null)
         }
       })
 

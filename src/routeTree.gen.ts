@@ -9,40 +9,40 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SoftphoneRouteImport } from './routes/softphone'
-import { Route as AdminsRouteImport } from './routes/admins'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SoftphoneScenarioIdRouteImport } from './routes/softphone.$scenarioId'
-import { Route as ApiHealthRouteImport } from './routes/api/health'
-import { Route as AdminsUsersRouteImport } from './routes/admins.users'
-import { Route as AdminsDeveloperInformationRouteImport } from './routes/admins.developer-information'
+import { Route as AdminsRouteImport } from './routes/admins'
+import { Route as SoftphoneRouteImport } from './routes/softphone'
 import { Route as AdminsAnalyticsRouteImport } from './routes/admins.analytics'
+import { Route as AdminsDeveloperInformationRouteImport } from './routes/admins.developer-information'
+import { Route as AdminsUsersRouteImport } from './routes/admins.users'
+import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as SoftphoneScenarioIdRouteImport } from './routes/softphone.$scenarioId'
 import { Route as AdminsScenariosIndexRouteImport } from './routes/admins.scenarios.index'
-import { Route as ApiSoftphoneUnlockRouteImport } from './routes/api/softphone/unlock'
-import { Route as ApiSoftphoneExternalEndpointsRouteImport } from './routes/api/softphone/external-endpoints'
-import { Route as ApiSoftphoneEventsRouteImport } from './routes/api/softphone/events'
-import { Route as ApiSoftphoneCaseRouteImport } from './routes/api/softphone/case'
-import { Route as ApiSoftphoneBootstrapRouteImport } from './routes/api/softphone/bootstrap'
-import { Route as ApiSoftphoneAcsTokenRouteImport } from './routes/api/softphone/acs-token'
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
-import { Route as AdminsScenariosNewRouteImport } from './routes/admins.scenarios.new'
 import { Route as AdminsScenariosScenarioIdRouteImport } from './routes/admins.scenarios.$scenarioId'
-import { Route as ApiSoftphoneScenarioScenarioIdRouteImport } from './routes/api/softphone/scenario.$scenarioId'
-import { Route as ApiSoftphoneCaseSetRouteImport } from './routes/api/softphone/case/set'
-import { Route as ApiSoftphoneCaseIvrRecognizedRouteImport } from './routes/api/softphone/case/ivr-recognized'
-import { Route as ApiSoftphoneCaseIvrRawTextRouteImport } from './routes/api/softphone/case/ivr-raw-text'
+import { Route as AdminsScenariosNewRouteImport } from './routes/admins.scenarios.new'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiSoftphoneAcsTokenRouteImport } from './routes/api/softphone/acs-token'
+import { Route as ApiSoftphoneBootstrapRouteImport } from './routes/api/softphone/bootstrap'
+import { Route as ApiSoftphoneCaseRouteImport } from './routes/api/softphone/case'
+import { Route as ApiSoftphoneEventsRouteImport } from './routes/api/softphone/events'
+import { Route as ApiSoftphoneExternalEndpointsRouteImport } from './routes/api/softphone/external-endpoints'
+import { Route as ApiSoftphoneUnlockRouteImport } from './routes/api/softphone/unlock'
 import { Route as ApiSoftphoneCaseDebugInformationRouteImport } from './routes/api/softphone/case/debug-information'
-import { Route as ApiPublicSoftphoneCaseSetRouteImport } from './routes/api/public/softphone/case/set'
+import { Route as ApiSoftphoneCaseIvrRawTextRouteImport } from './routes/api/softphone/case/ivr-raw-text'
+import { Route as ApiSoftphoneCaseIvrRecognizedRouteImport } from './routes/api/softphone/case/ivr-recognized'
+import { Route as ApiSoftphoneCaseSetRouteImport } from './routes/api/softphone/case/set'
+import { Route as ApiSoftphoneScenarioScenarioIdRouteImport } from './routes/api/softphone/scenario.$scenarioId'
 import { Route as ApiPublicSoftphoneCaseGetRouteImport } from './routes/api/public/softphone/case/get'
-import { Route as ApiPublicSoftphoneCasePhaseSetRouteImport } from './routes/api/public/softphone/case/phase/set'
-import { Route as ApiPublicSoftphoneCaseIvrRecognizedSetRouteImport } from './routes/api/public/softphone/case/ivr-recognized/set'
-import { Route as ApiPublicSoftphoneCaseIvrRawTextSetRouteImport } from './routes/api/public/softphone/case/ivr-raw-text/set'
-import { Route as ApiPublicSoftphoneCaseEventSetRouteImport } from './routes/api/public/softphone/case/event/set'
+import { Route as ApiPublicSoftphoneCaseSetRouteImport } from './routes/api/public/softphone/case/set'
 import { Route as ApiPublicSoftphoneCaseDebugInformationSetRouteImport } from './routes/api/public/softphone/case/debug-information/set'
+import { Route as ApiPublicSoftphoneCaseEventSetRouteImport } from './routes/api/public/softphone/case/event/set'
+import { Route as ApiPublicSoftphoneCaseIvrRawTextSetRouteImport } from './routes/api/public/softphone/case/ivr-raw-text/set'
+import { Route as ApiPublicSoftphoneCaseIvrRecognizedSetRouteImport } from './routes/api/public/softphone/case/ivr-recognized/set'
+import { Route as ApiPublicSoftphoneCasePhaseSetRouteImport } from './routes/api/public/softphone/case/phase/set'
 
-const SoftphoneRoute = SoftphoneRouteImport.update({
-  id: '/softphone',
-  path: '/softphone',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminsRoute = AdminsRouteImport.update({
@@ -50,24 +50,14 @@ const AdminsRoute = AdminsRouteImport.update({
   path: '/admins',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SoftphoneRoute = SoftphoneRouteImport.update({
+  id: '/softphone',
+  path: '/softphone',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SoftphoneScenarioIdRoute = SoftphoneScenarioIdRouteImport.update({
-  id: '/$scenarioId',
-  path: '/$scenarioId',
-  getParentRoute: () => SoftphoneRoute,
-} as any)
-const ApiHealthRoute = ApiHealthRouteImport.update({
-  id: '/api/health',
-  path: '/api/health',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminsUsersRoute = AdminsUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
+const AdminsAnalyticsRoute = AdminsAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => AdminsRoute,
 } as any)
 const AdminsDeveloperInformationRoute =
@@ -76,55 +66,24 @@ const AdminsDeveloperInformationRoute =
     path: '/developer-information',
     getParentRoute: () => AdminsRoute,
   } as any)
-const AdminsAnalyticsRoute = AdminsAnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
+const AdminsUsersRoute = AdminsUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => AdminsRoute,
+} as any)
+const ApiHealthRoute = ApiHealthRouteImport.update({
+  id: '/api/health',
+  path: '/api/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SoftphoneScenarioIdRoute = SoftphoneScenarioIdRouteImport.update({
+  id: '/$scenarioId',
+  path: '/$scenarioId',
+  getParentRoute: () => SoftphoneRoute,
 } as any)
 const AdminsScenariosIndexRoute = AdminsScenariosIndexRouteImport.update({
   id: '/scenarios/',
   path: '/scenarios/',
-  getParentRoute: () => AdminsRoute,
-} as any)
-const ApiSoftphoneUnlockRoute = ApiSoftphoneUnlockRouteImport.update({
-  id: '/api/softphone/unlock',
-  path: '/api/softphone/unlock',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSoftphoneExternalEndpointsRoute =
-  ApiSoftphoneExternalEndpointsRouteImport.update({
-    id: '/api/softphone/external-endpoints',
-    path: '/api/softphone/external-endpoints',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiSoftphoneEventsRoute = ApiSoftphoneEventsRouteImport.update({
-  id: '/api/softphone/events',
-  path: '/api/softphone/events',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSoftphoneCaseRoute = ApiSoftphoneCaseRouteImport.update({
-  id: '/api/softphone/case',
-  path: '/api/softphone/case',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSoftphoneBootstrapRoute = ApiSoftphoneBootstrapRouteImport.update({
-  id: '/api/softphone/bootstrap',
-  path: '/api/softphone/bootstrap',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSoftphoneAcsTokenRoute = ApiSoftphoneAcsTokenRouteImport.update({
-  id: '/api/softphone/acs-token',
-  path: '/api/softphone/acs-token',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
-  id: '/api/auth/$',
-  path: '/api/auth/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminsScenariosNewRoute = AdminsScenariosNewRouteImport.update({
-  id: '/scenarios/new',
-  path: '/scenarios/new',
   getParentRoute: () => AdminsRoute,
 } as any)
 const AdminsScenariosScenarioIdRoute =
@@ -133,21 +92,51 @@ const AdminsScenariosScenarioIdRoute =
     path: '/scenarios/$scenarioId',
     getParentRoute: () => AdminsRoute,
   } as any)
-const ApiSoftphoneScenarioScenarioIdRoute =
-  ApiSoftphoneScenarioScenarioIdRouteImport.update({
-    id: '/api/softphone/scenario/$scenarioId',
-    path: '/api/softphone/scenario/$scenarioId',
+const AdminsScenariosNewRoute = AdminsScenariosNewRouteImport.update({
+  id: '/scenarios/new',
+  path: '/scenarios/new',
+  getParentRoute: () => AdminsRoute,
+} as any)
+const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
+  id: '/api/auth/$',
+  path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSoftphoneAcsTokenRoute = ApiSoftphoneAcsTokenRouteImport.update({
+  id: '/api/softphone/acs-token',
+  path: '/api/softphone/acs-token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSoftphoneBootstrapRoute = ApiSoftphoneBootstrapRouteImport.update({
+  id: '/api/softphone/bootstrap',
+  path: '/api/softphone/bootstrap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSoftphoneCaseRoute = ApiSoftphoneCaseRouteImport.update({
+  id: '/api/softphone/case',
+  path: '/api/softphone/case',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSoftphoneEventsRoute = ApiSoftphoneEventsRouteImport.update({
+  id: '/api/softphone/events',
+  path: '/api/softphone/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSoftphoneExternalEndpointsRoute =
+  ApiSoftphoneExternalEndpointsRouteImport.update({
+    id: '/api/softphone/external-endpoints',
+    path: '/api/softphone/external-endpoints',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiSoftphoneCaseSetRoute = ApiSoftphoneCaseSetRouteImport.update({
-  id: '/set',
-  path: '/set',
-  getParentRoute: () => ApiSoftphoneCaseRoute,
+const ApiSoftphoneUnlockRoute = ApiSoftphoneUnlockRouteImport.update({
+  id: '/api/softphone/unlock',
+  path: '/api/softphone/unlock',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const ApiSoftphoneCaseIvrRecognizedRoute =
-  ApiSoftphoneCaseIvrRecognizedRouteImport.update({
-    id: '/ivr-recognized',
-    path: '/ivr-recognized',
+const ApiSoftphoneCaseDebugInformationRoute =
+  ApiSoftphoneCaseDebugInformationRouteImport.update({
+    id: '/debug-information',
+    path: '/debug-information',
     getParentRoute: () => ApiSoftphoneCaseRoute,
   } as any)
 const ApiSoftphoneCaseIvrRawTextRoute =
@@ -156,16 +145,21 @@ const ApiSoftphoneCaseIvrRawTextRoute =
     path: '/ivr-raw-text',
     getParentRoute: () => ApiSoftphoneCaseRoute,
   } as any)
-const ApiSoftphoneCaseDebugInformationRoute =
-  ApiSoftphoneCaseDebugInformationRouteImport.update({
-    id: '/debug-information',
-    path: '/debug-information',
+const ApiSoftphoneCaseIvrRecognizedRoute =
+  ApiSoftphoneCaseIvrRecognizedRouteImport.update({
+    id: '/ivr-recognized',
+    path: '/ivr-recognized',
     getParentRoute: () => ApiSoftphoneCaseRoute,
   } as any)
-const ApiPublicSoftphoneCaseSetRoute =
-  ApiPublicSoftphoneCaseSetRouteImport.update({
-    id: '/api/public/softphone/case/set',
-    path: '/api/public/softphone/case/set',
+const ApiSoftphoneCaseSetRoute = ApiSoftphoneCaseSetRouteImport.update({
+  id: '/set',
+  path: '/set',
+  getParentRoute: () => ApiSoftphoneCaseRoute,
+} as any)
+const ApiSoftphoneScenarioScenarioIdRoute =
+  ApiSoftphoneScenarioScenarioIdRouteImport.update({
+    id: '/api/softphone/scenario/$scenarioId',
+    path: '/api/softphone/scenario/$scenarioId',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicSoftphoneCaseGetRoute =
@@ -174,22 +168,16 @@ const ApiPublicSoftphoneCaseGetRoute =
     path: '/api/public/softphone/case/get',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicSoftphoneCasePhaseSetRoute =
-  ApiPublicSoftphoneCasePhaseSetRouteImport.update({
-    id: '/api/public/softphone/case/phase/set',
-    path: '/api/public/softphone/case/phase/set',
+const ApiPublicSoftphoneCaseSetRoute =
+  ApiPublicSoftphoneCaseSetRouteImport.update({
+    id: '/api/public/softphone/case/set',
+    path: '/api/public/softphone/case/set',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicSoftphoneCaseIvrRecognizedSetRoute =
-  ApiPublicSoftphoneCaseIvrRecognizedSetRouteImport.update({
-    id: '/api/public/softphone/case/ivr-recognized/set',
-    path: '/api/public/softphone/case/ivr-recognized/set',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiPublicSoftphoneCaseIvrRawTextSetRoute =
-  ApiPublicSoftphoneCaseIvrRawTextSetRouteImport.update({
-    id: '/api/public/softphone/case/ivr-raw-text/set',
-    path: '/api/public/softphone/case/ivr-raw-text/set',
+const ApiPublicSoftphoneCaseDebugInformationSetRoute =
+  ApiPublicSoftphoneCaseDebugInformationSetRouteImport.update({
+    id: '/api/public/softphone/case/debug-information/set',
+    path: '/api/public/softphone/case/debug-information/set',
     getParentRoute: () => rootRouteImport,
   } as any)
 const ApiPublicSoftphoneCaseEventSetRoute =
@@ -198,10 +186,22 @@ const ApiPublicSoftphoneCaseEventSetRoute =
     path: '/api/public/softphone/case/event/set',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicSoftphoneCaseDebugInformationSetRoute =
-  ApiPublicSoftphoneCaseDebugInformationSetRouteImport.update({
-    id: '/api/public/softphone/case/debug-information/set',
-    path: '/api/public/softphone/case/debug-information/set',
+const ApiPublicSoftphoneCaseIvrRawTextSetRoute =
+  ApiPublicSoftphoneCaseIvrRawTextSetRouteImport.update({
+    id: '/api/public/softphone/case/ivr-raw-text/set',
+    path: '/api/public/softphone/case/ivr-raw-text/set',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicSoftphoneCaseIvrRecognizedSetRoute =
+  ApiPublicSoftphoneCaseIvrRecognizedSetRouteImport.update({
+    id: '/api/public/softphone/case/ivr-recognized/set',
+    path: '/api/public/softphone/case/ivr-recognized/set',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicSoftphoneCasePhaseSetRoute =
+  ApiPublicSoftphoneCasePhaseSetRouteImport.update({
+    id: '/api/public/softphone/case/phase/set',
+    path: '/api/public/softphone/case/phase/set',
     getParentRoute: () => rootRouteImport,
   } as any)
 
@@ -425,11 +425,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/softphone': {
-      id: '/softphone'
-      path: '/softphone'
-      fullPath: '/softphone'
-      preLoaderRoute: typeof SoftphoneRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admins': {
@@ -439,32 +439,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/softphone': {
+      id: '/softphone'
+      path: '/softphone'
+      fullPath: '/softphone'
+      preLoaderRoute: typeof SoftphoneRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/softphone/$scenarioId': {
-      id: '/softphone/$scenarioId'
-      path: '/$scenarioId'
-      fullPath: '/softphone/$scenarioId'
-      preLoaderRoute: typeof SoftphoneScenarioIdRouteImport
-      parentRoute: typeof SoftphoneRoute
-    }
-    '/api/health': {
-      id: '/api/health'
-      path: '/api/health'
-      fullPath: '/api/health'
-      preLoaderRoute: typeof ApiHealthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admins/users': {
-      id: '/admins/users'
-      path: '/users'
-      fullPath: '/admins/users'
-      preLoaderRoute: typeof AdminsUsersRouteImport
+    '/admins/analytics': {
+      id: '/admins/analytics'
+      path: '/analytics'
+      fullPath: '/admins/analytics'
+      preLoaderRoute: typeof AdminsAnalyticsRouteImport
       parentRoute: typeof AdminsRoute
     }
     '/admins/developer-information': {
@@ -474,74 +460,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminsDeveloperInformationRouteImport
       parentRoute: typeof AdminsRoute
     }
-    '/admins/analytics': {
-      id: '/admins/analytics'
-      path: '/analytics'
-      fullPath: '/admins/analytics'
-      preLoaderRoute: typeof AdminsAnalyticsRouteImport
+    '/admins/users': {
+      id: '/admins/users'
+      path: '/users'
+      fullPath: '/admins/users'
+      preLoaderRoute: typeof AdminsUsersRouteImport
       parentRoute: typeof AdminsRoute
+    }
+    '/api/health': {
+      id: '/api/health'
+      path: '/api/health'
+      fullPath: '/api/health'
+      preLoaderRoute: typeof ApiHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/softphone/$scenarioId': {
+      id: '/softphone/$scenarioId'
+      path: '/$scenarioId'
+      fullPath: '/softphone/$scenarioId'
+      preLoaderRoute: typeof SoftphoneScenarioIdRouteImport
+      parentRoute: typeof SoftphoneRoute
     }
     '/admins/scenarios/': {
       id: '/admins/scenarios/'
       path: '/scenarios'
       fullPath: '/admins/scenarios/'
       preLoaderRoute: typeof AdminsScenariosIndexRouteImport
-      parentRoute: typeof AdminsRoute
-    }
-    '/api/softphone/unlock': {
-      id: '/api/softphone/unlock'
-      path: '/api/softphone/unlock'
-      fullPath: '/api/softphone/unlock'
-      preLoaderRoute: typeof ApiSoftphoneUnlockRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/softphone/external-endpoints': {
-      id: '/api/softphone/external-endpoints'
-      path: '/api/softphone/external-endpoints'
-      fullPath: '/api/softphone/external-endpoints'
-      preLoaderRoute: typeof ApiSoftphoneExternalEndpointsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/softphone/events': {
-      id: '/api/softphone/events'
-      path: '/api/softphone/events'
-      fullPath: '/api/softphone/events'
-      preLoaderRoute: typeof ApiSoftphoneEventsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/softphone/case': {
-      id: '/api/softphone/case'
-      path: '/api/softphone/case'
-      fullPath: '/api/softphone/case'
-      preLoaderRoute: typeof ApiSoftphoneCaseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/softphone/bootstrap': {
-      id: '/api/softphone/bootstrap'
-      path: '/api/softphone/bootstrap'
-      fullPath: '/api/softphone/bootstrap'
-      preLoaderRoute: typeof ApiSoftphoneBootstrapRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/softphone/acs-token': {
-      id: '/api/softphone/acs-token'
-      path: '/api/softphone/acs-token'
-      fullPath: '/api/softphone/acs-token'
-      preLoaderRoute: typeof ApiSoftphoneAcsTokenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/$': {
-      id: '/api/auth/$'
-      path: '/api/auth/$'
-      fullPath: '/api/auth/$'
-      preLoaderRoute: typeof ApiAuthSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admins/scenarios/new': {
-      id: '/admins/scenarios/new'
-      path: '/scenarios/new'
-      fullPath: '/admins/scenarios/new'
-      preLoaderRoute: typeof AdminsScenariosNewRouteImport
       parentRoute: typeof AdminsRoute
     }
     '/admins/scenarios/$scenarioId': {
@@ -551,25 +495,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminsScenariosScenarioIdRouteImport
       parentRoute: typeof AdminsRoute
     }
-    '/api/softphone/scenario/$scenarioId': {
-      id: '/api/softphone/scenario/$scenarioId'
-      path: '/api/softphone/scenario/$scenarioId'
-      fullPath: '/api/softphone/scenario/$scenarioId'
-      preLoaderRoute: typeof ApiSoftphoneScenarioScenarioIdRouteImport
+    '/admins/scenarios/new': {
+      id: '/admins/scenarios/new'
+      path: '/scenarios/new'
+      fullPath: '/admins/scenarios/new'
+      preLoaderRoute: typeof AdminsScenariosNewRouteImport
+      parentRoute: typeof AdminsRoute
+    }
+    '/api/auth/$': {
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/softphone/case/set': {
-      id: '/api/softphone/case/set'
-      path: '/set'
-      fullPath: '/api/softphone/case/set'
-      preLoaderRoute: typeof ApiSoftphoneCaseSetRouteImport
-      parentRoute: typeof ApiSoftphoneCaseRoute
+    '/api/softphone/acs-token': {
+      id: '/api/softphone/acs-token'
+      path: '/api/softphone/acs-token'
+      fullPath: '/api/softphone/acs-token'
+      preLoaderRoute: typeof ApiSoftphoneAcsTokenRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/api/softphone/case/ivr-recognized': {
-      id: '/api/softphone/case/ivr-recognized'
-      path: '/ivr-recognized'
-      fullPath: '/api/softphone/case/ivr-recognized'
-      preLoaderRoute: typeof ApiSoftphoneCaseIvrRecognizedRouteImport
+    '/api/softphone/bootstrap': {
+      id: '/api/softphone/bootstrap'
+      path: '/api/softphone/bootstrap'
+      fullPath: '/api/softphone/bootstrap'
+      preLoaderRoute: typeof ApiSoftphoneBootstrapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/softphone/case': {
+      id: '/api/softphone/case'
+      path: '/api/softphone/case'
+      fullPath: '/api/softphone/case'
+      preLoaderRoute: typeof ApiSoftphoneCaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/softphone/events': {
+      id: '/api/softphone/events'
+      path: '/api/softphone/events'
+      fullPath: '/api/softphone/events'
+      preLoaderRoute: typeof ApiSoftphoneEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/softphone/external-endpoints': {
+      id: '/api/softphone/external-endpoints'
+      path: '/api/softphone/external-endpoints'
+      fullPath: '/api/softphone/external-endpoints'
+      preLoaderRoute: typeof ApiSoftphoneExternalEndpointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/softphone/unlock': {
+      id: '/api/softphone/unlock'
+      path: '/api/softphone/unlock'
+      fullPath: '/api/softphone/unlock'
+      preLoaderRoute: typeof ApiSoftphoneUnlockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/softphone/case/debug-information': {
+      id: '/api/softphone/case/debug-information'
+      path: '/debug-information'
+      fullPath: '/api/softphone/case/debug-information'
+      preLoaderRoute: typeof ApiSoftphoneCaseDebugInformationRouteImport
       parentRoute: typeof ApiSoftphoneCaseRoute
     }
     '/api/softphone/case/ivr-raw-text': {
@@ -579,18 +565,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSoftphoneCaseIvrRawTextRouteImport
       parentRoute: typeof ApiSoftphoneCaseRoute
     }
-    '/api/softphone/case/debug-information': {
-      id: '/api/softphone/case/debug-information'
-      path: '/debug-information'
-      fullPath: '/api/softphone/case/debug-information'
-      preLoaderRoute: typeof ApiSoftphoneCaseDebugInformationRouteImport
+    '/api/softphone/case/ivr-recognized': {
+      id: '/api/softphone/case/ivr-recognized'
+      path: '/ivr-recognized'
+      fullPath: '/api/softphone/case/ivr-recognized'
+      preLoaderRoute: typeof ApiSoftphoneCaseIvrRecognizedRouteImport
       parentRoute: typeof ApiSoftphoneCaseRoute
     }
-    '/api/public/softphone/case/set': {
-      id: '/api/public/softphone/case/set'
-      path: '/api/public/softphone/case/set'
-      fullPath: '/api/public/softphone/case/set'
-      preLoaderRoute: typeof ApiPublicSoftphoneCaseSetRouteImport
+    '/api/softphone/case/set': {
+      id: '/api/softphone/case/set'
+      path: '/set'
+      fullPath: '/api/softphone/case/set'
+      preLoaderRoute: typeof ApiSoftphoneCaseSetRouteImport
+      parentRoute: typeof ApiSoftphoneCaseRoute
+    }
+    '/api/softphone/scenario/$scenarioId': {
+      id: '/api/softphone/scenario/$scenarioId'
+      path: '/api/softphone/scenario/$scenarioId'
+      fullPath: '/api/softphone/scenario/$scenarioId'
+      preLoaderRoute: typeof ApiSoftphoneScenarioScenarioIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/softphone/case/get': {
@@ -600,25 +593,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicSoftphoneCaseGetRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/softphone/case/phase/set': {
-      id: '/api/public/softphone/case/phase/set'
-      path: '/api/public/softphone/case/phase/set'
-      fullPath: '/api/public/softphone/case/phase/set'
-      preLoaderRoute: typeof ApiPublicSoftphoneCasePhaseSetRouteImport
+    '/api/public/softphone/case/set': {
+      id: '/api/public/softphone/case/set'
+      path: '/api/public/softphone/case/set'
+      fullPath: '/api/public/softphone/case/set'
+      preLoaderRoute: typeof ApiPublicSoftphoneCaseSetRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/softphone/case/ivr-recognized/set': {
-      id: '/api/public/softphone/case/ivr-recognized/set'
-      path: '/api/public/softphone/case/ivr-recognized/set'
-      fullPath: '/api/public/softphone/case/ivr-recognized/set'
-      preLoaderRoute: typeof ApiPublicSoftphoneCaseIvrRecognizedSetRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/softphone/case/ivr-raw-text/set': {
-      id: '/api/public/softphone/case/ivr-raw-text/set'
-      path: '/api/public/softphone/case/ivr-raw-text/set'
-      fullPath: '/api/public/softphone/case/ivr-raw-text/set'
-      preLoaderRoute: typeof ApiPublicSoftphoneCaseIvrRawTextSetRouteImport
+    '/api/public/softphone/case/debug-information/set': {
+      id: '/api/public/softphone/case/debug-information/set'
+      path: '/api/public/softphone/case/debug-information/set'
+      fullPath: '/api/public/softphone/case/debug-information/set'
+      preLoaderRoute: typeof ApiPublicSoftphoneCaseDebugInformationSetRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/softphone/case/event/set': {
@@ -628,11 +614,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicSoftphoneCaseEventSetRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/softphone/case/debug-information/set': {
-      id: '/api/public/softphone/case/debug-information/set'
-      path: '/api/public/softphone/case/debug-information/set'
-      fullPath: '/api/public/softphone/case/debug-information/set'
-      preLoaderRoute: typeof ApiPublicSoftphoneCaseDebugInformationSetRouteImport
+    '/api/public/softphone/case/ivr-raw-text/set': {
+      id: '/api/public/softphone/case/ivr-raw-text/set'
+      path: '/api/public/softphone/case/ivr-raw-text/set'
+      fullPath: '/api/public/softphone/case/ivr-raw-text/set'
+      preLoaderRoute: typeof ApiPublicSoftphoneCaseIvrRawTextSetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/softphone/case/ivr-recognized/set': {
+      id: '/api/public/softphone/case/ivr-recognized/set'
+      path: '/api/public/softphone/case/ivr-recognized/set'
+      fullPath: '/api/public/softphone/case/ivr-recognized/set'
+      preLoaderRoute: typeof ApiPublicSoftphoneCaseIvrRecognizedSetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/softphone/case/phase/set': {
+      id: '/api/public/softphone/case/phase/set'
+      path: '/api/public/softphone/case/phase/set'
+      fullPath: '/api/public/softphone/case/phase/set'
+      preLoaderRoute: typeof ApiPublicSoftphoneCasePhaseSetRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
