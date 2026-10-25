@@ -10,7 +10,7 @@ function validateScenarioPreviewInput(input: { scenarioId?: string | null | unde
 }
 
 export const getSoftphoneScenarioPreviewServer = createServerFn({ method: 'GET' })
-  .inputValidator(validateScenarioPreviewInput)
+  .validator(validateScenarioPreviewInput)
   .handler(async ({ data }): Promise<SoftphoneScenarioAccessPreview | null> => {
     const scenario = getSoftphoneTestScenarioById(data.scenarioId)
 
