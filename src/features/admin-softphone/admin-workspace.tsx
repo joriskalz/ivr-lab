@@ -1946,13 +1946,17 @@ export function AdminUsersPage() {
     },
   })
 
-  useEffect(() => {
+  const [previousRoles, setPreviousRoles] = useState(initialRolesByUserId)
+  if (previousRoles !== initialRolesByUserId) {
+    setPreviousRoles(initialRolesByUserId)
     setDraftRolesByUserId(initialRolesByUserId)
-  }, [initialRolesByUserId])
+  }
 
-  useEffect(() => {
+  const [previousAssignments, setPreviousAssignments] = useState(initialAssignmentsByScenarioId)
+  if (previousAssignments !== initialAssignmentsByScenarioId) {
+    setPreviousAssignments(initialAssignmentsByScenarioId)
     setDraftAssignmentsByScenarioId(initialAssignmentsByScenarioId)
-  }, [initialAssignmentsByScenarioId])
+  }
 
   if (!data.permissions.canManageUsers) {
     return (
